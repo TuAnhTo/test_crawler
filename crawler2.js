@@ -15,7 +15,15 @@ const textContent = await page.evaluate(
     )
   );
 
-console.log(textContent); 
-
+await asyncForEach(textContent, async(element)=>{
+    console.log(element)
+})
 browser.close();
 })();
+
+
+const asyncForEach = async (array, callback) => {
+    for (let index = 0; index < array.length; index++) {
+        await callback(array[index], index, array);
+    }
+};
